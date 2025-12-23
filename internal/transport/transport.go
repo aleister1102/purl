@@ -9,9 +9,9 @@ import (
 	"os"
 	"time"
 
-	"github.com/user/curlz/internal/cli"
-	"github.com/user/curlz/internal/errors"
-	"github.com/user/curlz/internal/target"
+	"github.com/user/purl/internal/cli"
+	"github.com/user/purl/internal/errors"
+	"github.com/user/purl/internal/target"
 )
 
 // NewTransport creates a configured http.Transport with TLS and timeout settings

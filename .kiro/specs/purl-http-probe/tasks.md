@@ -2,15 +2,15 @@
 
 ## Overview
 
-This plan implements curlz as a modular Go CLI tool with curl-compatible flags and automatic HTTP/HTTPS protocol detection. Tasks are ordered to build foundational components first, then wire them together incrementally.
+This plan implements purl as a modular Go CLI tool with curl-compatible flags and automatic HTTP/HTTPS protocol detection. Tasks are ordered to build foundational components first, then wire them together incrementally.
 
 ## Tasks
 
 - [x] 1. Project setup and core types
-  - Initialize Go module with `go mod init github.com/user/curlz`
+  - Initialize Go module with `go mod init github.com/user/purl`
   - Add dependency: `github.com/urfave/cli/v2`
   - Add test dependency: `github.com/leanovate/gopter`
-  - Create directory structure: `cmd/curlz/`, `internal/cli/`, `internal/target/`, `internal/protocol/`, `internal/request/`, `internal/transport/`, `internal/output/`
+  - Create directory structure: `cmd/purl/`, `internal/cli/`, `internal/target/`, `internal/protocol/`, `internal/request/`, `internal/transport/`, `internal/output/`
   - Define `Options` struct in `internal/cli/options.go`
   - Define error types and exit codes in `internal/errors/errors.go`
   - _Requirements: 7.1-7.6_
@@ -171,7 +171,7 @@ This plan implements curlz as a modular Go CLI tool with curl-compatible flags a
 - [x] 13. Final checkpoint
   - Ensure all tests pass, ask the user if questions arise.
   - Verify `go build` produces working binary
-  - Test basic usage: `./curlz localhost:8080`
+  - Test basic usage: `./purl localhost:8080`
 
 ## Notes
 

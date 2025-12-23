@@ -6,7 +6,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/user/curlz/internal/errors"
+	"github.com/user/purl/internal/errors"
 )
 
 // ParsedTarget represents a normalized URL with metadata

@@ -7,8 +7,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/user/curlz/internal/cli"
-	"github.com/user/curlz/internal/protocol"
+	"github.com/user/purl/internal/cli"
+	"github.com/user/purl/internal/protocol"
 )
 
 // Handler manages output formatting and writing

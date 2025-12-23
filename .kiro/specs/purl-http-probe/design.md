@@ -388,9 +388,9 @@ Unit tests complement property tests for:
 ### Test Organization
 
 ```
-curlz/
+purl/
 ├── cmd/
-│   └── curlz/
+│   └── purl/
 │       └── main.go
 ├── internal/
 │   ├── cli/

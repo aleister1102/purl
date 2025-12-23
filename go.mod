@@ -1,4 +1,4 @@
-module github.com/user/curlz
+module github.com/user/purl
 
 go 1.25.4
 

@@ -1,4 +1,4 @@
-BINARY_NAME=curlz
+BINARY_NAME=purl
 BIN_DIR=bin
 BUILD_DIR=dist
 INSTALL_PATH=$(HOME)/.local/bin
@@ -32,7 +32,7 @@ help:
 
 build:
 	mkdir -p $(BIN_DIR)
-	go build -ldflags "-X main.Version=$(CURRENT_TAG) -X main.Commit=$(COMMIT) -X main.Date=$(DATE)" -o $(BIN_DIR)/$(BINARY_NAME) cmd/curlz/main.go
+	go build -ldflags "-X main.Version=$(CURRENT_TAG) -X main.Commit=$(COMMIT) -X main.Date=$(DATE)" -o $(BIN_DIR)/$(BINARY_NAME) cmd/purl/main.go
 
 clean:
 	rm -rf $(BIN_DIR)
@@ -64,12 +64,12 @@ release: ## Release new version (usage: make release TAG=v1.0.0)
 	@go test ./...
 	@rm -rf $(BUILD_DIR) && mkdir -p $(BUILD_DIR)
 	@echo "Building binaries..."
-	@GOOS=linux GOARCH=amd64 go build -ldflags "-X main.Version=$(TAG) -X main.Commit=$(COMMIT) -X main.Date=$(DATE) -s -w" -o $(BUILD_DIR)/$(BINARY_NAME)-linux-amd64 cmd/curlz/main.go
-	@GOOS=linux GOARCH=arm64 go build -ldflags "-X main.Version=$(TAG) -X main.Commit=$(COMMIT) -X main.Date=$(DATE) -s -w" -o $(BUILD_DIR)/$(BINARY_NAME)-linux-arm64 cmd/curlz/main.go
-	@GOOS=darwin GOARCH=amd64 go build -ldflags "-X main.Version=$(TAG) -X main.Commit=$(COMMIT) -X main.Date=$(DATE) -s -w" -o $(BUILD_DIR)/$(BINARY_NAME)-darwin-amd64 cmd/curlz/main.go
-	@GOOS=darwin GOARCH=arm64 go build -ldflags "-X main.Version=$(TAG) -X main.Commit=$(COMMIT) -X main.Date=$(DATE) -s -w" -o $(BUILD_DIR)/$(BINARY_NAME)-darwin-arm64 cmd/curlz/main.go
-	@GOOS=windows GOARCH=amd64 go build -ldflags "-X main.Version=$(TAG) -X main.Commit=$(COMMIT) -X main.Date=$(DATE) -s -w" -o $(BUILD_DIR)/$(BINARY_NAME)-windows-amd64.exe cmd/curlz/main.go
-	@GOOS=windows GOARCH=arm64 go build -ldflags "-X main.Version=$(TAG) -X main.Commit=$(COMMIT) -X main.Date=$(DATE) -s -w" -o $(BUILD_DIR)/$(BINARY_NAME)-windows-arm64.exe cmd/curlz/main.go
+	@GOOS=linux GOARCH=amd64 go build -ldflags "-X main.Version=$(TAG) -X main.Commit=$(COMMIT) -X main.Date=$(DATE) -s -w" -o $(BUILD_DIR)/$(BINARY_NAME)-linux-amd64 cmd/purl/main.go
+	@GOOS=linux GOARCH=arm64 go build -ldflags "-X main.Version=$(TAG) -X main.Commit=$(COMMIT) -X main.Date=$(DATE) -s -w" -o $(BUILD_DIR)/$(BINARY_NAME)-linux-arm64 cmd/purl/main.go
+	@GOOS=darwin GOARCH=amd64 go build -ldflags "-X main.Version=$(TAG) -X main.Commit=$(COMMIT) -X main.Date=$(DATE) -s -w" -o $(BUILD_DIR)/$(BINARY_NAME)-darwin-amd64 cmd/purl/main.go
+	@GOOS=darwin GOARCH=arm64 go build -ldflags "-X main.Version=$(TAG) -X main.Commit=$(COMMIT) -X main.Date=$(DATE) -s -w" -o $(BUILD_DIR)/$(BINARY_NAME)-darwin-arm64 cmd/purl/main.go
+	@GOOS=windows GOARCH=amd64 go build -ldflags "-X main.Version=$(TAG) -X main.Commit=$(COMMIT) -X main.Date=$(DATE) -s -w" -o $(BUILD_DIR)/$(BINARY_NAME)-windows-amd64.exe cmd/purl/main.go
+	@GOOS=windows GOARCH=arm64 go build -ldflags "-X main.Version=$(TAG) -X main.Commit=$(COMMIT) -X main.Date=$(DATE) -s -w" -o $(BUILD_DIR)/$(BINARY_NAME)-windows-arm64.exe cmd/purl/main.go
 	@cd $(BUILD_DIR) && shasum -a 256 * > checksums.txt
 	@echo "Creating GitHub release..."
 	@git tag -a $(TAG) -m "Release $(TAG)"

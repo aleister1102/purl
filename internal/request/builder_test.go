@@ -11,8 +11,8 @@ import (
 	"github.com/leanovate/gopter"
 	"github.com/leanovate/gopter/gen"
 	"github.com/leanovate/gopter/prop"
-	"github.com/user/curlz/internal/cli"
-	"github.com/user/curlz/internal/target"
+	"github.com/user/purl/internal/cli"
+	"github.com/user/purl/internal/target"
 )
 
 // Unit Tests
@@ -306,7 +306,7 @@ func TestBuildRequest_JSONHeaders(t *testing.T) {
 func TestProperty_HTTPMethodSetting(t *testing.T) {
 	properties := gopter.NewProperties(nil)
 
-	properties.Property("HTTP Method Setting - Feature: curlz-http-probe, Property 8: HTTP Method Setting",
+	properties.Property("HTTP Method Setting - Feature: purl-http-probe, Property 8: HTTP Method Setting",
 		prop.ForAll(
 			func(method string) bool {
 				// Skip empty methods
@@ -345,7 +345,7 @@ func TestProperty_HTTPMethodSetting(t *testing.T) {
 func TestProperty_HeaderAccumulation(t *testing.T) {
 	properties := gopter.NewProperties(nil)
 
-	properties.Property("Header Accumulation - Feature: curlz-http-probe, Property 9: Header Accumulation",
+	properties.Property("Header Accumulation - Feature: purl-http-probe, Property 9: Header Accumulation",
 		prop.ForAll(
 			func(headers []string) bool {
 				parsedTarget := &target.ParsedTarget{
@@ -399,7 +399,7 @@ func TestProperty_HeaderAccumulation(t *testing.T) {
 func TestProperty_DataFlagBehavior(t *testing.T) {
 	properties := gopter.NewProperties(nil)
 
-	properties.Property("Data Flag Behavior - Feature: curlz-http-probe, Property 10: Data Flag Behavior",
+	properties.Property("Data Flag Behavior - Feature: purl-http-probe, Property 10: Data Flag Behavior",
 		prop.ForAll(
 			func(data string) bool {
 				// Only test non-empty data (empty data is indistinguishable from no flag)
@@ -439,7 +439,7 @@ func TestProperty_DataFlagBehavior(t *testing.T) {
 func TestProperty_RawDataPreservation(t *testing.T) {
 	properties := gopter.NewProperties(nil)
 
-	properties.Property("Raw Data Preservation - Feature: curlz-http-probe, Property 11: Raw Data Preservation",
+	properties.Property("Raw Data Preservation - Feature: purl-http-probe, Property 11: Raw Data Preservation",
 		prop.ForAll(
 			func(data string) bool {
 				parsedTarget := &target.ParsedTarget{
@@ -484,7 +484,7 @@ func TestProperty_RawDataPreservation(t *testing.T) {
 func TestProperty_BasicAuthHeaderGeneration(t *testing.T) {
 	properties := gopter.NewProperties(nil)
 
-	properties.Property("Basic Auth Header Generation - Feature: curlz-http-probe, Property 12: Basic Auth Header Generation",
+	properties.Property("Basic Auth Header Generation - Feature: purl-http-probe, Property 12: Basic Auth Header Generation",
 		prop.ForAll(
 			func(user, password string) bool {
 				parsedTarget := &target.ParsedTarget{
@@ -523,7 +523,7 @@ func TestProperty_BasicAuthHeaderGeneration(t *testing.T) {
 func TestProperty_CookieHeaderSetting(t *testing.T) {
 	properties := gopter.NewProperties(nil)
 
-	properties.Property("Cookie Header Setting - Feature: curlz-http-probe, Property 13: Cookie Header Setting",
+	properties.Property("Cookie Header Setting - Feature: purl-http-probe, Property 13: Cookie Header Setting",
 		prop.ForAll(
 			func(cookie string) bool {
 				parsedTarget := &target.ParsedTarget{
@@ -557,7 +557,7 @@ func TestProperty_CookieHeaderSetting(t *testing.T) {
 func TestProperty_UserAgentHeaderSetting(t *testing.T) {
 	properties := gopter.NewProperties(nil)
 
-	properties.Property("User-Agent Header Setting - Feature: curlz-http-probe, Property 14: User-Agent Header Setting",
+	properties.Property("User-Agent Header Setting - Feature: purl-http-probe, Property 14: User-Agent Header Setting",
 		prop.ForAll(
 			func(ua string) bool {
 				parsedTarget := &target.ParsedTarget{
@@ -591,7 +591,7 @@ func TestProperty_UserAgentHeaderSetting(t *testing.T) {
 func TestProperty_RefererHeaderSetting(t *testing.T) {
 	properties := gopter.NewProperties(nil)
 
-	properties.Property("Referer Header Setting - Feature: curlz-http-probe, Property 15: Referer Header Setting",
+	properties.Property("Referer Header Setting - Feature: purl-http-probe, Property 15: Referer Header Setting",
 		prop.ForAll(
 			func(referer string) bool {
 				parsedTarget := &target.ParsedTarget{
@@ -625,7 +625,7 @@ func TestProperty_RefererHeaderSetting(t *testing.T) {
 func TestProperty_HEADRequestFlag(t *testing.T) {
 	properties := gopter.NewProperties(nil)
 
-	properties.Property("HEAD Request Flag - Feature: curlz-http-probe, Property 16: HEAD Request Flag",
+	properties.Property("HEAD Request Flag - Feature: purl-http-probe, Property 16: HEAD Request Flag",
 		prop.ForAll(
 			func(_ struct{}) bool {
 				parsedTarget := &target.ParsedTarget{
@@ -659,7 +659,7 @@ func TestProperty_HEADRequestFlag(t *testing.T) {
 func TestProperty_JSONFlagHeaders(t *testing.T) {
 	properties := gopter.NewProperties(nil)
 
-	properties.Property("JSON Flag Headers - Feature: curlz-http-probe, Property 17: JSON Flag Headers",
+	properties.Property("JSON Flag Headers - Feature: purl-http-probe, Property 17: JSON Flag Headers",
 		prop.ForAll(
 			func(_ struct{}) bool {
 				parsedTarget := &target.ParsedTarget{

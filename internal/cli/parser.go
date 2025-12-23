@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/urfave/cli/v2"
-	"github.com/user/curlz/internal/errors"
+	"github.com/user/purl/internal/errors"
 )
 
 // ParseArgs parses command-line arguments and returns Options
@@ -17,7 +17,7 @@ func ParseArgs(args []string) (*Options, error) {
 	}
 
 	app := &cli.App{
-		Name:  "curlz",
+		Name:  "purl",
 		Usage: "curl-compatible HTTP probe with auto protocol detection",
 		Flags: buildFlags(),
 		Action: func(c *cli.Context) error {
@@ -30,7 +30,7 @@ func ParseArgs(args []string) (*Options, error) {
 			// Parse all flags into options
 			return parseFlags(c, opts)
 		},
-		HelpName: "curlz",
+		HelpName: "purl",
 	}
 
 	// Parse arguments - urfave/cli will handle flag parsing

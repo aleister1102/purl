@@ -13,8 +13,8 @@ import (
 	"github.com/leanovate/gopter"
 	"github.com/leanovate/gopter/gen"
 	"github.com/leanovate/gopter/prop"
-	"github.com/user/curlz/internal/cli"
-	"github.com/user/curlz/internal/protocol"
+	"github.com/user/purl/internal/cli"
+	"github.com/user/purl/internal/protocol"
 )
 
 // Unit Tests
@@ -205,7 +205,7 @@ func TestWriteResponseBody_ToStdout(t *testing.T) {
 
 func TestWriteResponseBody_ToFile(t *testing.T) {
 	// Create a temporary file
-	tmpFile, err := os.CreateTemp("", "curlz-test-*.txt")
+	tmpFile, err := os.CreateTemp("", "purl-test-*.txt")
 	if err != nil {
 		t.Fatalf("failed to create temp file: %v", err)
 	}
@@ -251,7 +251,7 @@ func TestPrintVerboseRequest(t *testing.T) {
 		Proto:  "HTTP/1.1",
 		Header: http.Header{
 			"Content-Type": []string{"application/json"},
-			"User-Agent":   []string{"curlz/1.0"},
+			"User-Agent":   []string{"purl/1.0"},
 		},
 	}
 
@@ -522,7 +522,7 @@ func TestProperty_FileOutputCreation(t *testing.T) {
 	properties.Property("File output contains exact body content", prop.ForAll(
 		func(bodyContent string) bool {
 			// Create a temporary file
-			tmpFile, err := os.CreateTemp("", "curlz-prop-test-*.txt")
+			tmpFile, err := os.CreateTemp("", "purl-prop-test-*.txt")
 			if err != nil {
 				return false
 			}

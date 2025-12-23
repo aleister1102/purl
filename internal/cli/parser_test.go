@@ -7,7 +7,7 @@ import (
 	"github.com/leanovate/gopter"
 	"github.com/leanovate/gopter/gen"
 	"github.com/leanovate/gopter/prop"
-	"github.com/user/curlz/internal/errors"
+	"github.com/user/purl/internal/errors"
 )
 
 // Test 10.1: Basic flag parsing
@@ -20,7 +20,7 @@ func TestParseArgsBasic(t *testing.T) {
 	}{
 		{
 			name:    "target only",
-			args:    []string{"curlz", "localhost:8080"},
+			args:    []string{"purl", "localhost:8080"},
 			wantErr: false,
 			check: func(o *Options) bool {
 				return o.Target == "localhost:8080" && o.Proto == "auto"
@@ -28,7 +28,7 @@ func TestParseArgsBasic(t *testing.T) {
 		},
 		{
 			name:    "with method flag",
-			args:    []string{"curlz", "-X", "POST", "localhost:8080"},
+			args:    []string{"purl", "-X", "POST", "localhost:8080"},
 			wantErr: false,
 			check: func(o *Options) bool {
 				return o.Method == "POST" && o.Target == "localhost:8080"
@@ -36,7 +36,7 @@ func TestParseArgsBasic(t *testing.T) {
 		},
 		{
 			name:    "with long method flag",
-			args:    []string{"curlz", "--request", "PUT", "localhost:8080"},
+			args:    []string{"purl", "--request", "PUT", "localhost:8080"},
 			wantErr: false,
 			check: func(o *Options) bool {
 				return o.Method == "PUT"
@@ -44,7 +44,7 @@ func TestParseArgsBasic(t *testing.T) {
 		},
 		{
 			name:    "with single header",
-			args:    []string{"curlz", "-H", "Content-Type: application/json", "localhost:8080"},
+			args:    []string{"purl", "-H", "Content-Type: application/json", "localhost:8080"},
 			wantErr: false,
 			check: func(o *Options) bool {
 				return len(o.Headers) == 1 && o.Headers[0] == "Content-Type: application/json"
@@ -52,7 +52,7 @@ func TestParseArgsBasic(t *testing.T) {
 		},
 		{
 			name:    "with multiple headers",
-			args:    []string{"curlz", "-H", "X-Custom: value1", "-H", "X-Another: value2", "localhost:8080"},
+			args:    []string{"purl", "-H", "X-Custom: value1", "-H", "X-Another: value2", "localhost:8080"},
 			wantErr: false,
 			check: func(o *Options) bool {
 				return len(o.Headers) == 2 && o.Headers[0] == "X-Custom: value1" && o.Headers[1] == "X-Another: value2"
@@ -60,7 +60,7 @@ func TestParseArgsBasic(t *testing.T) {
 		},
 		{
 			name:    "with data flag",
-			args:    []string{"curlz", "-d", "key=value", "localhost:8080"},
+			args:    []string{"purl", "-d", "key=value", "localhost:8080"},
 			wantErr: false,
 			check: func(o *Options) bool {
 				return o.Data == "key=value"
@@ -68,7 +68,7 @@ func TestParseArgsBasic(t *testing.T) {
 		},
 		{
 			name:    "with data-raw flag",
-			args:    []string{"curlz", "--data-raw", "@special&chars=", "localhost:8080"},
+			args:    []string{"purl", "--data-raw", "@special&chars=", "localhost:8080"},
 			wantErr: false,
 			check: func(o *Options) bool {
 				return o.DataRaw == "@special&chars="
@@ -76,7 +76,7 @@ func TestParseArgsBasic(t *testing.T) {
 		},
 		{
 			name:    "with user flag",
-			args:    []string{"curlz", "-u", "user:pass", "localhost:8080"},
+			args:    []string{"purl", "-u", "user:pass", "localhost:8080"},
 			wantErr: false,
 			check: func(o *Options) bool {
 				return o.User == "user:pass"
@@ -84,7 +84,7 @@ func TestParseArgsBasic(t *testing.T) {
 		},
 		{
 			name:    "with cookie flag",
-			args:    []string{"curlz", "--cookie", "session=abc123", "localhost:8080"},
+			args:    []string{"purl", "--cookie", "session=abc123", "localhost:8080"},
 			wantErr: false,
 			check: func(o *Options) bool {
 				return o.Cookie == "session=abc123"
@@ -92,7 +92,7 @@ func TestParseArgsBasic(t *testing.T) {
 		},
 		{
 			name:    "with user-agent flag",
-			args:    []string{"curlz", "--user-agent", "MyAgent/1.0", "localhost:8080"},
+			args:    []string{"purl", "--user-agent", "MyAgent/1.0", "localhost:8080"},
 			wantErr: false,
 			check: func(o *Options) bool {
 				return o.UserAgent == "MyAgent/1.0"
@@ -100,7 +100,7 @@ func TestParseArgsBasic(t *testing.T) {
 		},
 		{
 			name:    "with referer flag",
-			args:    []string{"curlz", "--referer", "https://example.com", "localhost:8080"},
+			args:    []string{"purl", "--referer", "https://example.com", "localhost:8080"},
 			wantErr: false,
 			check: func(o *Options) bool {
 				return o.Referer == "https://example.com"
@@ -108,7 +108,7 @@ func TestParseArgsBasic(t *testing.T) {
 		},
 		{
 			name:    "with verbose flag",
-			args:    []string{"curlz", "-v", "localhost:8080"},
+			args:    []string{"purl", "-v", "localhost:8080"},
 			wantErr: false,
 			check: func(o *Options) bool {
 				return o.Verbose == true
@@ -116,7 +116,7 @@ func TestParseArgsBasic(t *testing.T) {
 		},
 		{
 			name:    "with verbose-tls flag",
-			args:    []string{"curlz", "--verbose-tls", "localhost:8080"},
+			args:    []string{"purl", "--verbose-tls", "localhost:8080"},
 			wantErr: false,
 			check: func(o *Options) bool {
 				return o.VerboseTLS == true
@@ -124,7 +124,7 @@ func TestParseArgsBasic(t *testing.T) {
 		},
 		{
 			name:    "with output flag",
-			args:    []string{"curlz", "-o", "output.txt", "localhost:8080"},
+			args:    []string{"purl", "-o", "output.txt", "localhost:8080"},
 			wantErr: false,
 			check: func(o *Options) bool {
 				return o.Output == "output.txt"
@@ -132,7 +132,7 @@ func TestParseArgsBasic(t *testing.T) {
 		},
 		{
 			name:    "with head flag",
-			args:    []string{"curlz", "-I", "localhost:8080"},
+			args:    []string{"purl", "-I", "localhost:8080"},
 			wantErr: false,
 			check: func(o *Options) bool {
 				return o.Head == true
@@ -140,7 +140,7 @@ func TestParseArgsBasic(t *testing.T) {
 		},
 		{
 			name:    "with json flag",
-			args:    []string{"curlz", "--json", "localhost:8080"},
+			args:    []string{"purl", "--json", "localhost:8080"},
 			wantErr: false,
 			check: func(o *Options) bool {
 				return o.JSON == true
@@ -148,7 +148,7 @@ func TestParseArgsBasic(t *testing.T) {
 		},
 		{
 			name:    "with insecure flag",
-			args:    []string{"curlz", "-k", "localhost:8080"},
+			args:    []string{"purl", "-k", "localhost:8080"},
 			wantErr: false,
 			check: func(o *Options) bool {
 				return o.Insecure == true
@@ -156,7 +156,7 @@ func TestParseArgsBasic(t *testing.T) {
 		},
 		{
 			name:    "with cacert flag",
-			args:    []string{"curlz", "--cacert", "/path/to/ca.pem", "localhost:8080"},
+			args:    []string{"purl", "--cacert", "/path/to/ca.pem", "localhost:8080"},
 			wantErr: false,
 			check: func(o *Options) bool {
 				return o.CACert == "/path/to/ca.pem"
@@ -164,7 +164,7 @@ func TestParseArgsBasic(t *testing.T) {
 		},
 		{
 			name:    "with cert flag",
-			args:    []string{"curlz", "--cert", "/path/to/cert.pem", "localhost:8080"},
+			args:    []string{"purl", "--cert", "/path/to/cert.pem", "localhost:8080"},
 			wantErr: false,
 			check: func(o *Options) bool {
 				return o.Cert == "/path/to/cert.pem"
@@ -172,7 +172,7 @@ func TestParseArgsBasic(t *testing.T) {
 		},
 		{
 			name:    "with key flag",
-			args:    []string{"curlz", "--key", "/path/to/key.pem", "localhost:8080"},
+			args:    []string{"purl", "--key", "/path/to/key.pem", "localhost:8080"},
 			wantErr: false,
 			check: func(o *Options) bool {
 				return o.Key == "/path/to/key.pem"
@@ -180,7 +180,7 @@ func TestParseArgsBasic(t *testing.T) {
 		},
 		{
 			name:    "with strict-ssl flag",
-			args:    []string{"curlz", "--strict-ssl", "localhost:8080"},
+			args:    []string{"purl", "--strict-ssl", "localhost:8080"},
 			wantErr: false,
 			check: func(o *Options) bool {
 				return o.StrictSSL == true
@@ -188,7 +188,7 @@ func TestParseArgsBasic(t *testing.T) {
 		},
 		{
 			name:    "with proto flag",
-			args:    []string{"curlz", "--proto", "https", "localhost:8080"},
+			args:    []string{"purl", "--proto", "https", "localhost:8080"},
 			wantErr: false,
 			check: func(o *Options) bool {
 				return o.Proto == "https"
@@ -196,7 +196,7 @@ func TestParseArgsBasic(t *testing.T) {
 		},
 		{
 			name:    "with timeout flag",
-			args:    []string{"curlz", "--timeout", "30s", "localhost:8080"},
+			args:    []string{"purl", "--timeout", "30s", "localhost:8080"},
 			wantErr: false,
 			check: func(o *Options) bool {
 				return o.Timeout == 30*time.Second
@@ -204,7 +204,7 @@ func TestParseArgsBasic(t *testing.T) {
 		},
 		{
 			name:    "with connect-timeout flag",
-			args:    []string{"curlz", "--connect-timeout", "5s", "localhost:8080"},
+			args:    []string{"purl", "--connect-timeout", "5s", "localhost:8080"},
 			wantErr: false,
 			check: func(o *Options) bool {
 				return o.ConnectTimeout == 5*time.Second
@@ -212,7 +212,7 @@ func TestParseArgsBasic(t *testing.T) {
 		},
 		{
 			name:    "with max-time flag (alias for timeout)",
-			args:    []string{"curlz", "--max-time", "20s", "localhost:8080"},
+			args:    []string{"purl", "--max-time", "20s", "localhost:8080"},
 			wantErr: false,
 			check: func(o *Options) bool {
 				return o.Timeout == 20*time.Second
@@ -220,7 +220,7 @@ func TestParseArgsBasic(t *testing.T) {
 		},
 		{
 			name:    "flags before target",
-			args:    []string{"curlz", "-X", "POST", "-H", "X-Test: value", "localhost:8080"},
+			args:    []string{"purl", "-X", "POST", "-H", "X-Test: value", "localhost:8080"},
 			wantErr: false,
 			check: func(o *Options) bool {
 				return o.Method == "POST" && len(o.Headers) == 1 && o.Target == "localhost:8080"
@@ -228,7 +228,7 @@ func TestParseArgsBasic(t *testing.T) {
 		},
 		{
 			name:    "flags after target",
-			args:    []string{"curlz", "localhost:8080", "-X", "POST"},
+			args:    []string{"purl", "localhost:8080", "-X", "POST"},
 			wantErr: false,
 			check: func(o *Options) bool {
 				// urfave/cli stops parsing flags after the first positional arg
@@ -239,7 +239,7 @@ func TestParseArgsBasic(t *testing.T) {
 		},
 		{
 			name:    "mixed flag positions",
-			args:    []string{"curlz", "-X", "POST", "localhost:8080", "-H", "X-Test: value"},
+			args:    []string{"purl", "-X", "POST", "localhost:8080", "-H", "X-Test: value"},
 			wantErr: false,
 			check: func(o *Options) bool {
 				// Flags before target work, flags after target are ignored
@@ -248,7 +248,7 @@ func TestParseArgsBasic(t *testing.T) {
 		},
 		{
 			name:    "flag with equals format",
-			args:    []string{"curlz", "-X=PUT", "localhost:8080"},
+			args:    []string{"purl", "-X=PUT", "localhost:8080"},
 			wantErr: false,
 			check: func(o *Options) bool {
 				return o.Method == "PUT"
@@ -256,7 +256,7 @@ func TestParseArgsBasic(t *testing.T) {
 		},
 		{
 			name:    "long flag with equals format",
-			args:    []string{"curlz", "--request=DELETE", "localhost:8080"},
+			args:    []string{"purl", "--request=DELETE", "localhost:8080"},
 			wantErr: false,
 			check: func(o *Options) bool {
 				return o.Method == "DELETE"
@@ -264,17 +264,17 @@ func TestParseArgsBasic(t *testing.T) {
 		},
 		{
 			name:    "no target",
-			args:    []string{"curlz"},
+			args:    []string{"purl"},
 			wantErr: true,
 		},
 		{
 			name:    "invalid proto value",
-			args:    []string{"curlz", "--proto", "ftp", "localhost:8080"},
+			args:    []string{"purl", "--proto", "ftp", "localhost:8080"},
 			wantErr: true,
 		},
 		{
 			name:    "invalid timeout format",
-			args:    []string{"curlz", "--timeout", "invalid", "localhost:8080"},
+			args:    []string{"purl", "--timeout", "invalid", "localhost:8080"},
 			wantErr: true,
 		},
 	}
@@ -297,7 +297,7 @@ func TestParseArgsBasic(t *testing.T) {
 // For any valid set of flags and target, the CLI parser should produce identical Options
 // when flags are placed before the target (urfave/cli stops parsing flags after first positional arg)
 func TestProperty19FlagOrderIndependence(t *testing.T) {
-	// Feature: curlz-http-probe, Property 19: Flag Order Independence
+	// Feature: purl-http-probe, Property 19: Flag Order Independence
 	prop.ForAll(
 		func(method, header1, header2 string) bool {
 			// Normalize inputs
@@ -312,11 +312,11 @@ func TestProperty19FlagOrderIndependence(t *testing.T) {
 			}
 
 			// Parse with flags before target (standard curl behavior)
-			args1 := []string{"curlz", "-X", method, "-H", header1, "-H", header2, "localhost:8080"}
+			args1 := []string{"purl", "-X", method, "-H", header1, "-H", header2, "localhost:8080"}
 			opts1, err1 := ParseArgs(args1)
 
 			// Parse with different flag order but still before target
-			args2 := []string{"curlz", "-H", header1, "-X", method, "-H", header2, "localhost:8080"}
+			args2 := []string{"purl", "-H", header1, "-X", method, "-H", header2, "localhost:8080"}
 			opts2, err2 := ParseArgs(args2)
 
 			if err1 != nil || err2 != nil {
@@ -338,7 +338,7 @@ func TestProperty19FlagOrderIndependence(t *testing.T) {
 // For any flag that has both short and long forms, the CLI parser should produce
 // identical Options for either form
 func TestProperty20ShortLongFlagEquivalence(t *testing.T) {
-	// Feature: curlz-http-probe, Property 20: Short and Long Flag Equivalence
+	// Feature: purl-http-probe, Property 20: Short and Long Flag Equivalence
 	prop.ForAll(
 		func(method, header, user string) bool {
 			// Normalize inputs
@@ -353,11 +353,11 @@ func TestProperty20ShortLongFlagEquivalence(t *testing.T) {
 			}
 
 			// Parse with short flags
-			argsShort := []string{"curlz", "-X", method, "-H", header, "-u", user, "-v", "-k", "-I", "localhost:8080"}
+			argsShort := []string{"purl", "-X", method, "-H", header, "-u", user, "-v", "-k", "-I", "localhost:8080"}
 			optsShort, errShort := ParseArgs(argsShort)
 
 			// Parse with long flags
-			argsLong := []string{"curlz", "--request", method, "--header", header, "--user", user, "--verbose", "--insecure", "--head", "localhost:8080"}
+			argsLong := []string{"purl", "--request", method, "--header", header, "--user", user, "--verbose", "--insecure", "--head", "localhost:8080"}
 			optsLong, errLong := ParseArgs(argsLong)
 
 			if errShort != nil || errLong != nil {
@@ -382,7 +382,7 @@ func TestProperty20ShortLongFlagEquivalence(t *testing.T) {
 // For any flag that accepts a value, the CLI parser should produce identical results
 // for space-separated and equals-separated formats
 func TestProperty21FlagValueFormatEquivalence(t *testing.T) {
-	// Feature: curlz-http-probe, Property 21: Flag Value Format Equivalence
+	// Feature: purl-http-probe, Property 21: Flag Value Format Equivalence
 	prop.ForAll(
 		func(method, header, timeout string) bool {
 			// Normalize inputs
@@ -397,11 +397,11 @@ func TestProperty21FlagValueFormatEquivalence(t *testing.T) {
 			}
 
 			// Parse with space-separated format
-			argsSpace := []string{"curlz", "-X", method, "-H", header, "--timeout", timeout, "localhost:8080"}
+			argsSpace := []string{"purl", "-X", method, "-H", header, "--timeout", timeout, "localhost:8080"}
 			optsSpace, errSpace := ParseArgs(argsSpace)
 
 			// Parse with equals-separated format
-			argsEquals := []string{"curlz", "-X=" + method, "-H=" + header, "--timeout=" + timeout, "localhost:8080"}
+			argsEquals := []string{"purl", "-X=" + method, "-H=" + header, "--timeout=" + timeout, "localhost:8080"}
 			optsEquals, errEquals := ParseArgs(argsEquals)
 
 			if errSpace != nil || errEquals != nil {
@@ -423,7 +423,7 @@ func TestProperty21FlagValueFormatEquivalence(t *testing.T) {
 // For any flag not in the supported set, the CLI parser should return an error
 // that maps to exit code 2
 func TestProperty22UnknownFlagRejection(t *testing.T) {
-	// Feature: curlz-http-probe, Property 22: Unknown Flag Rejection
+	// Feature: purl-http-probe, Property 22: Unknown Flag Rejection
 	prop.ForAll(
 		func(unknownFlag string) bool {
 			// Ensure the flag is not a known flag
@@ -443,7 +443,7 @@ func TestProperty22UnknownFlagRejection(t *testing.T) {
 			}
 
 			// Try to parse with unknown flag
-			args := []string{"curlz", "--" + unknownFlag, "value", "localhost:8080"}
+			args := []string{"purl", "--" + unknownFlag, "value", "localhost:8080"}
 			_, err := ParseArgs(args)
 
 			// Should return an error
