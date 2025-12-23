@@ -7,7 +7,7 @@ import (
 	"github.com/leanovate/gopter"
 	"github.com/leanovate/gopter/gen"
 	"github.com/leanovate/gopter/prop"
-	"github.com/user/purl/internal/errors"
+	"github.com/aleister1102/purl/internal/errors"
 )
 
 // Test 10.1: Basic flag parsing

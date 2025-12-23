@@ -12,13 +12,13 @@ A curl-compatible HTTP probe with automatic protocol detection. Purl simplifies 
 ## Installation
 
 ```bash
-go install github.com/user/purl/cmd/purl@latest
+go install github.com/aleister1102/purl/cmd/purl@latest
 ```
 
 Or build from source:
 
 ```bash
-git clone https://github.com/user/purl.git
+git clone https://github.com/aleister1102/purl.git
 cd purl
 go build -o purl ./cmd/purl
 ```

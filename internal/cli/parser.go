@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/urfave/cli/v2"
-	"github.com/user/purl/internal/errors"
+	"github.com/aleister1102/purl/internal/errors"
 )
 
 // ParseArgs parses command-line arguments and returns Options

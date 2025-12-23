@@ -13,8 +13,8 @@ import (
 	"github.com/leanovate/gopter"
 	"github.com/leanovate/gopter/gen"
 	"github.com/leanovate/gopter/prop"
-	"github.com/user/purl/internal/cli"
-	"github.com/user/purl/internal/protocol"
+	"github.com/aleister1102/purl/internal/cli"
+	"github.com/aleister1102/purl/internal/protocol"
 )
 
 // Unit Tests

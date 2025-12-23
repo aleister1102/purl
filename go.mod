@@ -1,4 +1,4 @@
-module github.com/user/purl
+module github.com/aleister1102/purl
 
 go 1.25.4
 

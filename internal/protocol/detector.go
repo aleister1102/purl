@@ -6,10 +6,10 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/user/purl/internal/cli"
-	"github.com/user/purl/internal/errors"
-	"github.com/user/purl/internal/target"
-	"github.com/user/purl/internal/transport"
+	"github.com/aleister1102/purl/internal/cli"
+	"github.com/aleister1102/purl/internal/errors"
+	"github.com/aleister1102/purl/internal/target"
+	"github.com/aleister1102/purl/internal/transport"
 )
 
 // ProbeResult contains the result of protocol detection

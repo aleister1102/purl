@@ -8,8 +8,8 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/user/purl/internal/cli"
-	"github.com/user/purl/internal/target"
+	"github.com/aleister1102/purl/internal/cli"
+	"github.com/aleister1102/purl/internal/target"
 )
 
 // BuildRequest creates an http.Request from CLI options and parsed target
